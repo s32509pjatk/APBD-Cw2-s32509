@@ -15,6 +15,11 @@ var laptop2 = new Laptop("MacBook Air", 8, "M1");
 var laptop3 = new Laptop("Asus ZenBook", 16, "Ryzen 7");
 var camera = new Camera("Sony Alpha", "Full Frame", "4K");
 
+rentalService.AddEquipment(laptop1);
+rentalService.AddEquipment(laptop2);
+rentalService.AddEquipment(laptop3);
+rentalService.AddEquipment(camera);
+
 Console.WriteLine("\n--- TEST: Limity Studenta ---");
 Console.WriteLine(rentalService.RentEquipment(student, laptop1)); 
 Console.WriteLine(rentalService.RentEquipment(student, laptop2)); 
@@ -28,6 +33,13 @@ Console.WriteLine($"Wybrany sprzęt: {laptop1.Name}");
 Console.WriteLine($"Specyfikacja: RAM: {laptop1.RamSize}GB, CPU: {laptop1.CpuType}");
 Console.WriteLine($"Unikalne ID (GUID): {laptop1.Id}");
 
-Console.WriteLine("\n--- TEST: Zwrot sprzętu ---");
-Console.WriteLine(rentalService.ReturnEquipment(laptop1.Id));
+Console.WriteLine("\n--- TEST: Zwrot opóźniony (Kara) ---");
+DateTime dataWPrzyszlosci = DateTime.Now.AddDays(17); 
+Console.WriteLine(rentalService.ReturnEquipment(laptop1.Id, dataWPrzyszlosci));
 
+Console.WriteLine("\n--- TEST: Zwrot sprzętu o czasie---");
+Console.WriteLine(rentalService.ReturnEquipment(laptop2.Id));
+
+Console.WriteLine("\n--- RAPORTY SYSTEMOWE ---");
+rentalService.ShowInventoryReport(); 
+rentalService.ShowOverdueReport();
